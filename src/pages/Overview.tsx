@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { fetchTours } from '../api/tours'
-import { API_URL } from '../config/env'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
 
@@ -13,7 +12,11 @@ export default function Overview() {
   useEffect(() => {
     fetchTours()
       .then(setTours)
-      .catch(() => setError(`Could not load tours. Is the API running at ${API_URL}?`))
+      .catch(() =>
+        setError(
+          `Could not load tours. Is the API running at ${import.meta.env.VITE_API_URL}?`,
+        ),
+      )
       .finally(() => setLoading(false))
   }, [])
 

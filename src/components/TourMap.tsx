@@ -3,15 +3,13 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import { useEffect, useRef } from 'react'
 import type { TourLocation } from '../types'
 
-import { MAPBOX_TOKEN } from '../config/env'
-
 export default function TourMap({ locations }: { locations: TourLocation[] }) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!containerRef.current || locations.length === 0) return
 
-    mapboxgl.accessToken = MAPBOX_TOKEN
+    mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
     const map = new mapboxgl.Map({
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/streets-v11',
