@@ -10,6 +10,7 @@ import TourMap from '../components/TourMap'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
 import { normalizeId } from '../utils/mongoId'
+import { userPhotoUrl } from '../utils/staticUrl'
 
 export default function TourDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -118,7 +119,7 @@ export default function TourDetail() {
                 <div className="overview-box__detail" key={normalizeId(guide._id)}>
                   <img
                     className="overview-box__img"
-                    src={`/img/users/${guide.photo}`}
+                    src={userPhotoUrl(guide.photo)}
                     alt={guide.name}
                   />
                   {guide.role === 'lead-guide' && (

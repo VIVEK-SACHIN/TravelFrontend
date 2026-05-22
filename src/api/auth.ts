@@ -32,9 +32,11 @@ export async function fetchCurrentUser(): Promise<User | null> {
 }
 
 export async function updateUserData(form: FormData) {
-  const { data } = await api.patch('/users/updateUserData', form, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  })
+  // Let the browser set multipart boundary — do not set Content-Type manually.
+  const { data } = await api.patch<{ data: { user: User } }>(
+    '/users/updateUserData',
+    form,
+  )
   return data
 }
 

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { userPhotoUrl } from '../utils/staticUrl'
 import { useAuth } from '../context/AuthContext'
 import { useAlert } from '../context/AlertContext'
 
@@ -42,7 +43,7 @@ export default function Header() {
             <Link className="nav__el" to="/me">
               <img
                 className="nav__user-img"
-                src={`/img/users/${user.photo}`}
+                src={userPhotoUrl(user.photo)}
                 alt={`Photo of ${user.name}`}
               />
               <span>{user.name.split(' ')[0]}</span>

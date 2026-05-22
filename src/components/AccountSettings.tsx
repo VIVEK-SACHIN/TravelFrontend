@@ -1,29 +1,66 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useRef, useState } from 'react'
 import { updatePassword, updateUserData } from '../api/auth'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
 import { getApiErrorMessage } from '../utils/apiError'
+import { userPhotoUrl } from '../utils/staticUrl'
 
 export default function AccountSettings() {
   const { user, refreshUser } = useAuth()
   const { showAlert } = useAlert()
   const [savingPassword, setSavingPassword] = useState(false)
+  const [savingData, setSavingData] = useState(false)
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null)
+  const [photoVersion, setPhotoVersion] = useState(0)
+  const previewUrlRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current)
+      }
+    }
+  }, [])
 
   if (!user) return null
 
+  const displayPhotoSrc =
+    photoPreview ?? userPhotoUrl(user.photo, photoVersion)
+
+  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current)
+      previewUrlRef.current = null
+    }
+    if (!file) {
+      setPhotoPreview(null)
+      return
+    }
+    const url = URL.createObjectURL(file)
+    previewUrlRef.current = url
+    setPhotoPreview(url)
+  }
+
   const handleDataSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setSavingData(true)
     const form = new FormData(e.currentTarget)
-    const photo = (e.currentTarget.elements.namedItem('photo') as HTMLInputElement)
-      .files?.[0]
-    if (photo) form.set('photo', photo)
 
     try {
       await updateUserData(form)
       await refreshUser()
+      setPhotoVersion((v) => v + 1)
+      if (previewUrlRef.current) {
+        URL.revokeObjectURL(previewUrlRef.current)
+        previewUrlRef.current = null
+      }
+      setPhotoPreview(null)
       showAlert('success', 'DATA updated successfully!')
     } catch (err: unknown) {
       showAlert('error', getApiErrorMessage(err) ?? 'Update failed.')
+    } finally {
+      setSavingData(false)
     }
   }
 
@@ -81,7 +118,7 @@ export default function AccountSettings() {
           <div className="form__group form__photo-upload">
             <img
               className="form__user-photo"
-              src={`/img/users/${user.photo}`}
+              src={displayPhotoSrc}
               alt="User"
             />
             <input
@@ -90,12 +127,17 @@ export default function AccountSettings() {
               accept="image/*"
               id="photo"
               name="photo"
+              onChange={handlePhotoChange}
             />
             <label htmlFor="photo">Choose new photo</label>
           </div>
           <div className="form__group right">
-            <button className="btn btn--small btn--green" type="submit">
-              Save settings
+            <button
+              className="btn btn--small btn--green"
+              type="submit"
+              disabled={savingData}
+            >
+              {savingData ? 'Saving...' : 'Save settings'}
             </button>
           </div>
         </form>

@@ -20,6 +20,11 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true,
       },
+      // User avatars are stored on the API server (Natours `public/img/users`).
+      '/img/users': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
     },
   },
 })
