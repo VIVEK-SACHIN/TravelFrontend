@@ -19,7 +19,11 @@ export async function signup(body: Record<string, string>) {
 
 export async function fetchCurrentUser(): Promise<User | null> {
   try {
-    const { data } = await api.get<{ data: { doc: User } }>('/users/me')
+    const { status, data } = await api.get<{ data: { doc: User } }>('/users/me', {
+      // 401 is normal on first load when there is no session cookie.
+      validateStatus: (s) => s === 200 || s === 401,
+    })
+    if (status === 401) return null
     const user = data.data.doc
     return { ...user, _id: normalizeId(user._id) }
   } catch {

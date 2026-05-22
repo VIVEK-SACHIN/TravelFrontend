@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
 import { getApiErrorMessage } from '../utils/apiError'
@@ -8,7 +8,10 @@ export default function Login() {
   const { user, login } = useAuth()
   const { showAlert } = useAlert()
   const navigate = useNavigate()
+  const location = useLocation()
   const [submitting, setSubmitting] = useState(false)
+  const redirectTo =
+    (location.state as { from?: string } | null)?.from ?? '/'
 
   if (user) return <Navigate to="/" replace />
 
@@ -22,7 +25,7 @@ export default function Login() {
     try {
       await login(email, password)
       showAlert('success', 'Logged in successfully!')
-      window.setTimeout(() => navigate('/'), 1500)
+      window.setTimeout(() => navigate(redirectTo), 1500)
     } catch (err: unknown) {
       showAlert(
         'error',

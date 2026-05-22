@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { bookTour, bookTourErrorMessage } from '../api/bookings'
 import { fetchTourBySlug } from '../api/tours'
+import { useAlert } from '../context/AlertContext'
+import { useAuth } from '../context/AuthContext'
 import OverviewBox from '../components/OverviewBox'
 import ReviewCard from '../components/ReviewCard'
 import TourMap from '../components/TourMap'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
+import { normalizeId } from '../utils/mongoId'
 
 export default function TourDetail() {
   const { slug } = useParams<{ slug: string }>()
+  const navigate = useNavigate()
+  const { user } = useAuth()
+  const { showAlert } = useAlert()
   const [tour, setTour] = useState<Tour | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [booking, setBooking] = useState(false)
 
   useEffect(() => {
     if (!slug) return
@@ -30,6 +38,21 @@ export default function TourDetail() {
   if (!tour) return null
 
   const paragraphs = tour.description.split('\n')
+
+  const handleBookTour = async () => {
+    if (!user) {
+      navigate('/login', { state: { from: `/tour/${slug}` } })
+      return
+    }
+
+    setBooking(true)
+    try {
+      await bookTour(normalizeId(tour._id))
+    } catch (err: unknown) {
+      showAlert('error', bookTourErrorMessage(err))
+      setBooking(false)
+    }
+  }
 
   return (
     <>
@@ -92,7 +115,7 @@ export default function TourDetail() {
             <div className="overview-box__group">
               <h2 className="heading-secondary ma-bt-lg">Your tour guides</h2>
               {tour.guides.map((guide) => (
-                <div className="overview-box__detail" key={guide._id}>
+                <div className="overview-box__detail" key={normalizeId(guide._id)}>
                   <img
                     className="overview-box__img"
                     src={`/img/users/${guide.photo}`}
@@ -140,7 +163,7 @@ export default function TourDetail() {
       <section className="section-reviews">
         <div className="reviews">
           {tour.reviews?.map((review) => (
-            <ReviewCard key={review._id} review={review} />
+            <ReviewCard key={normalizeId(review._id)} review={review} />
           ))}
         </div>
       </section>
@@ -170,8 +193,14 @@ export default function TourDetail() {
               {tour.duration} days. 1 adventure. Infinite memories. Make it yours
               today!
             </p>
-            <button type="button" className="btn btn--green span-all-rows">
-              Book tour now!
+            <button
+              type="button"
+              className="btn btn--green span-all-rows"
+              id="book-tour"
+              disabled={booking}
+              onClick={handleBookTour}
+            >
+              {booking ? 'Processing...' : 'Book tour now!'}
             </button>
           </div>
         </div>

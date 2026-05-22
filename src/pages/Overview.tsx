@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { fetchTours } from '../api/tours'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
+import { normalizeId } from '../utils/mongoId'
 
 export default function Overview() {
   const [tours, setTours] = useState<Tour[]>([])
@@ -40,7 +41,7 @@ export default function Overview() {
     <main className="main">
       <div className="card-container">
         {tours.map((tour) => (
-          <div className="card" key={tour._id}>
+          <div className="card" key={normalizeId(tour._id)}>
             <div className="card__header">
               <div className="card__picture">
                 <div className="card__picture-overlay">&nbsp;</div>

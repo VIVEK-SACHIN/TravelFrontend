@@ -1,4 +1,5 @@
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { updatePassword, updateUserData } from '../api/auth'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
@@ -30,7 +31,16 @@ function NavItem({
 export default function Account() {
   const { user, refreshUser } = useAuth()
   const { showAlert } = useAlert()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [savingPassword, setSavingPassword] = useState(false)
+
+  useEffect(() => {
+    if (searchParams.get('alert') === 'booking') {
+      showAlert('success', 'Booking successful! Check your email for confirmation.')
+      searchParams.delete('alert')
+      setSearchParams(searchParams, { replace: true })
+    }
+  }, [searchParams, setSearchParams, showAlert])
 
   if (!user) return null
 

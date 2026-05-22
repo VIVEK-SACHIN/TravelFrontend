@@ -7,10 +7,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+.env
+.env.local
+
 node_modules
 dist
 dist-ssr
 *.local
+
+# Local HTTPS dev certs (generate with: openssl req -x509 ...)
+localhost-key.pem
+localhost.pem
 
 # Editor directories and files
 .vscode/*
