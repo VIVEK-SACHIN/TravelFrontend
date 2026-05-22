@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AccountBookings from '../components/AccountBookings'
+import AccountReviews from '../components/AccountReviews'
 import AccountSettings from '../components/AccountSettings'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
@@ -99,6 +100,7 @@ export default function Account() {
 
         {activeTab === 'settings' && <AccountSettings />}
         {activeTab === 'bookings' && <AccountBookings />}
+        {activeTab === 'reviews' && <AccountReviews />}
       </div>
     </main>
   )

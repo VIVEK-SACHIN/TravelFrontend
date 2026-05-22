@@ -13,6 +13,20 @@ export interface Review {
   user: User
 }
 
+/** Review on the account page, with tour summary from `GET /reviews/my`. */
+export interface MyReview {
+  _id: string | { $oid: string }
+  review: string
+  rating: number
+  createdAt?: string | Date
+  tour: {
+    _id: string | { $oid: string }
+    name: string
+    slug: string
+    imageCover: string
+  }
+}
+
 export interface TourLocation {
   type: string
   coordinates: [number, number]
