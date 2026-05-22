@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { fetchMyReviews } from '../api/reviews'
+import { deleteReview, fetchMyReviews } from '../api/reviews'
+import ConfirmDialog from './ConfirmDialog'
+import WriteReviewForm from './WriteReviewForm'
+import { useAlert } from '../context/AlertContext'
 import type { MyReview } from '../types'
+import { getApiErrorMessage } from '../utils/apiError'
 import { normalizeId } from '../utils/mongoId'
 import './account-bookings.css'
 
@@ -33,11 +37,39 @@ function ReviewStars({ rating }: { rating: number }) {
   )
 }
 
-function MyReviewCard({ item }: { item: MyReview }) {
+function MyReviewCard({
+  item,
+  onUpdated,
+}: {
+  item: MyReview
+  onUpdated: () => void
+}) {
   const { tour } = item
+  const { showAlert } = useAlert()
+  const reviewId = normalizeId(item._id)
+  const tourId = normalizeId(tour._id)
+  const [editing, setEditing] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+
+  const handleConfirmDelete = async () => {
+    setDeleting(true)
+    try {
+      await deleteReview(reviewId)
+      showAlert('success', 'Your review has been deleted.')
+      setConfirmDelete(false)
+      onUpdated()
+    } catch (err: unknown) {
+      showAlert('error', getApiErrorMessage(err) ?? 'Could not delete review.')
+    } finally {
+      setDeleting(false)
+    }
+  }
 
   return (
-    <article className="booking-card review-item">
+    <article
+      className={`booking-card review-item${editing ? ' booking-card--expanded' : ''}`}
+    >
       <div className="booking-card__media">
         <div className="booking-card__media-overlay" aria-hidden />
         <img
@@ -50,20 +82,80 @@ function MyReviewCard({ item }: { item: MyReview }) {
 
       <div className="booking-card__body">
         <h3 className="booking-card__title">{tour.name}</h3>
-        <ReviewStars rating={item.rating} />
-        <p className="booking-card__summary review-item__text">{item.review}</p>
-        {item.createdAt && (
-          <span className="booking-card__date">
-            Reviewed {formatReviewDate(item.createdAt)}
-          </span>
+        {!editing && (
+          <>
+            <ReviewStars rating={item.rating} />
+            <p className="booking-card__summary review-item__text">{item.review}</p>
+            {item.createdAt && (
+              <span className="booking-card__date">
+                Reviewed {formatReviewDate(item.createdAt)}
+              </span>
+            )}
+          </>
         )}
       </div>
 
       <div className="booking-card__aside">
-        <Link className="btn btn--green btn--small" to={`/tour/${tour.slug}`}>
-          View tour
-        </Link>
+        <div className="booking-card__actions">
+          <Link className="btn btn--green btn--small" to={`/tour/${tour.slug}`}>
+            View tour
+          </Link>
+          {!editing && (
+            <>
+              <button
+                type="button"
+                className="btn btn--small btn--white booking-card__review-btn"
+                onClick={() => setEditing(true)}
+                disabled={deleting}
+              >
+                Edit review
+              </button>
+              <button
+                type="button"
+                className="btn btn--small btn--white booking-card__delete-btn"
+                onClick={() => setConfirmDelete(true)}
+                disabled={deleting}
+              >
+                Delete review
+              </button>
+            </>
+          )}
+        </div>
       </div>
+
+      <ConfirmDialog
+        open={confirmDelete}
+        title="Delete review?"
+        message={
+          <>
+            Delete your review for <strong>{tour.name}</strong>? This action cannot
+            be undone.
+          </>
+        }
+        confirmLabel="Delete review"
+        cancelLabel="Keep review"
+        variant="danger"
+        loading={deleting}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => !deleting && setConfirmDelete(false)}
+      />
+
+      {editing && (
+        <div className="booking-card__review-form">
+          <WriteReviewForm
+            tourId={tourId}
+            tourName={tour.name}
+            reviewId={reviewId}
+            initialReview={item.review}
+            initialRating={item.rating}
+            onSuccess={() => {
+              setEditing(false)
+              onUpdated()
+            }}
+            onCancel={() => setEditing(false)}
+          />
+        </div>
+      )}
     </article>
   )
 }
@@ -73,12 +165,16 @@ export default function AccountReviews() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const loadReviews = useCallback(async () => {
+    const list = await fetchMyReviews()
+    setReviews(list)
+  }, [])
+
   useEffect(() => {
-    fetchMyReviews()
-      .then(setReviews)
+    loadReviews()
       .catch(() => setError('Could not load your reviews. Please try again.'))
       .finally(() => setLoading(false))
-  }, [])
+  }, [loadReviews])
 
   if (loading) {
     return (
@@ -128,7 +224,11 @@ export default function AccountReviews() {
       ) : (
         <div className="account-bookings__list">
           {reviews.map((item) => (
-            <MyReviewCard key={normalizeId(item._id)} item={item} />
+            <MyReviewCard
+              key={normalizeId(item._id)}
+              item={item}
+              onUpdated={loadReviews}
+            />
           ))}
         </div>
       )}
