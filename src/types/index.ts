@@ -21,6 +21,14 @@ export interface TourLocation {
   day?: number
 }
 
+export interface Booking {
+  _id: string | { $oid: string }
+  price: number
+  paid: boolean
+  createdAt?: string | Date
+  tour: Tour
+}
+
 export interface Tour {
   /** Plain string after `normalizeTour`; API may send `{ $oid: string }` from Rust/Mongo. */
   _id: string | { $oid: string }

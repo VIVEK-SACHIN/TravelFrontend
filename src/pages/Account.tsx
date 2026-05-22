@@ -1,24 +1,32 @@
-import { FormEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { updatePassword, updateUserData } from '../api/auth'
+import AccountBookings from '../components/AccountBookings'
+import AccountSettings from '../components/AccountSettings'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
-import { getApiErrorMessage } from '../utils/apiError'
+
+type AccountTab = 'settings' | 'bookings' | 'reviews' | 'billing'
 
 function NavItem({
-  href,
   text,
   icon,
   active = false,
+  onSelect,
 }: {
-  href: string
   text: string
   icon: string
   active?: boolean
+  onSelect: () => void
 }) {
   return (
     <li className={active ? 'side-nav--active' : ''}>
-      <a href={href}>
+      <a
+        href="#"
+        onClick={(e) => {
+          e.preventDefault()
+          onSelect()
+        }}
+      >
         <svg>
           <use xlinkHref={`/img/icons.svg#icon-${icon}`} />
         </svg>
@@ -29,13 +37,14 @@ function NavItem({
 }
 
 export default function Account() {
-  const { user, refreshUser } = useAuth()
+  const { user } = useAuth()
   const { showAlert } = useAlert()
   const [searchParams, setSearchParams] = useSearchParams()
-  const [savingPassword, setSavingPassword] = useState(false)
+  const [activeTab, setActiveTab] = useState<AccountTab>('settings')
 
   useEffect(() => {
     if (searchParams.get('alert') === 'booking') {
+      setActiveTab('bookings')
       showAlert('success', 'Booking successful! Check your email for confirmation.')
       searchParams.delete('alert')
       setSearchParams(searchParams, { replace: true })
@@ -44,178 +53,52 @@ export default function Account() {
 
   if (!user) return null
 
-  const handleDataSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = new FormData(e.currentTarget)
-    const photo = (e.currentTarget.elements.namedItem('photo') as HTMLInputElement)
-      .files?.[0]
-    if (photo) form.set('photo', photo)
-
-    try {
-      await updateUserData(form)
-      await refreshUser()
-      showAlert('success', 'DATA updated successfully!')
-    } catch (err: unknown) {
-      showAlert('error', getApiErrorMessage(err) ?? 'Update failed.')
-    }
-  }
-
-  const handlePasswordSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSavingPassword(true)
-    const form = new FormData(e.currentTarget)
-
-    try {
-      await updatePassword({
-        passwordCurrent: String(form.get('passwordCurrent')),
-        password: String(form.get('password')),
-        passwordConfirm: String(form.get('passwordConfirm')),
-      })
-      showAlert('success', 'PASSWORD updated successfully!')
-      e.currentTarget.reset()
-    } catch (err: unknown) {
-      showAlert('error', getApiErrorMessage(err) ?? 'Password update failed.')
-    } finally {
-      setSavingPassword(false)
-    }
-  }
-
   return (
     <main className="main">
       <div className="user-view">
         <nav className="user-view__menu">
           <ul className="side-nav">
-            <NavItem href="#" text="Settings" icon="settings" active />
-            <NavItem href="#" text="My bookings" icon="briefcase" />
-            <NavItem href="#" text="My reviews" icon="star" />
-            <NavItem href="#" text="Billing" icon="credit-card" />
+            <NavItem
+              text="Settings"
+              icon="settings"
+              active={activeTab === 'settings'}
+              onSelect={() => setActiveTab('settings')}
+            />
+            <NavItem
+              text="My bookings"
+              icon="briefcase"
+              active={activeTab === 'bookings'}
+              onSelect={() => setActiveTab('bookings')}
+            />
+            <NavItem
+              text="My reviews"
+              icon="star"
+              active={activeTab === 'reviews'}
+              onSelect={() => setActiveTab('reviews')}
+            />
+            <NavItem
+              text="Billing"
+              icon="credit-card"
+              active={activeTab === 'billing'}
+              onSelect={() => setActiveTab('billing')}
+            />
           </ul>
 
           {user.role === 'admin' && (
             <div className="admin-nav">
               <h5 className="admin-nav__heading">Admin</h5>
               <ul className="side-nav">
-                <NavItem href="#" text="Manage tours" icon="map" />
-                <NavItem href="#" text="Manage users" icon="users" />
-                <NavItem href="#" text="Manage reviews" icon="star" />
-                <NavItem href="#" text="Manage bookings" icon="briefcase" />
+                <NavItem text="Manage tours" icon="map" onSelect={() => {}} />
+                <NavItem text="Manage users" icon="users" onSelect={() => {}} />
+                <NavItem text="Manage reviews" icon="star" onSelect={() => {}} />
+                <NavItem text="Manage bookings" icon="briefcase" onSelect={() => {}} />
               </ul>
             </div>
           )}
         </nav>
 
-        <div className="user-view__content">
-          <div className="user-view__form-container">
-            <h2 className="heading-secondary ma-bt-md">Your account settings</h2>
-            <form className="form form-user-data" onSubmit={handleDataSubmit}>
-              <div className="form__group">
-                <label className="form__label" htmlFor="name">
-                  Name
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  className="form__input"
-                  type="text"
-                  defaultValue={user.name}
-                  required
-                />
-              </div>
-              <div className="form__group ma-bt-md">
-                <label className="form__label" htmlFor="email">
-                  Email address
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  className="form__input"
-                  type="email"
-                  defaultValue={user.email}
-                  required
-                />
-              </div>
-              <div className="form__group form__photo-upload">
-                <img
-                  className="form__user-photo"
-                  src={`/img/users/${user.photo}`}
-                  alt="User"
-                />
-                <input
-                  className="form__upload"
-                  type="file"
-                  accept="image/*"
-                  id="photo"
-                  name="photo"
-                />
-                <label htmlFor="photo">Choose new photo</label>
-              </div>
-              <div className="form__group right">
-                <button className="btn btn--small btn--green" type="submit">
-                  Save settings
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div className="line">&nbsp;</div>
-
-          <div className="user-view__form-container">
-            <h2 className="heading-secondary ma-bt-md">Password change</h2>
-            <form className="form form-user-password" onSubmit={handlePasswordSubmit}>
-              <div className="form__group">
-                <label className="form__label" htmlFor="password-current">
-                  Current password
-                </label>
-                <input
-                  id="password-current"
-                  name="passwordCurrent"
-                  className="form__input"
-                  type="password"
-                  placeholder="••••••••"
-                  required
-                  minLength={8}
-                />
-              </div>
-              <div className="form__group">
-                <label className="form__label" htmlFor="password">
-                  New password
-                </label>
-                <input
-                  id="password"
-                  name="password"
-                  className="form__input"
-                  type="password"
-                  placeholder="••••••••"
-                  required
-                  minLength={8}
-                />
-              </div>
-              <div className="form__group ma-bt-lg">
-                <label className="form__label" htmlFor="password-confirm">
-                  Confirm password
-                </label>
-                <input
-                  id="password-confirm"
-                  name="passwordConfirm"
-                  className="form__input"
-                  type="password"
-                  placeholder="••••••••"
-                  required
-                  minLength={8}
-                />
-              </div>
-              <div className="form__group right">
-                <button
-                  className="btn btn--small btn--green btn--save-password"
-                  type="submit"
-                  disabled={savingPassword}
-                >
-                  {savingPassword ? 'Updating...' : 'Save password'}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+        {activeTab === 'settings' && <AccountSettings />}
+        {activeTab === 'bookings' && <AccountBookings />}
       </div>
     </main>
   )
