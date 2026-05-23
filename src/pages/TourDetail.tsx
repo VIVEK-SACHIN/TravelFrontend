@@ -10,7 +10,7 @@ import TourMap from '../components/TourMap'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
 import { normalizeId } from '../utils/mongoId'
-import { userPhotoUrl } from '../utils/staticUrl'
+import { tourImageUrl, userPhotoUrl } from '../utils/staticUrl'
 
 export default function TourDetail() {
   const { slug } = useParams<{ slug: string }>()
@@ -62,7 +62,7 @@ export default function TourDetail() {
           <div className="header__hero-overlay">&nbsp;</div>
           <img
             className="header__hero-img"
-            src={`/img/tours/${tour.imageCover}`}
+            src={tourImageUrl(tour.imageCover)}
             alt={tour.name}
           />
         </div>
@@ -150,7 +150,7 @@ export default function TourDetail() {
           <div className="picture-box" key={img}>
             <img
               className={`picture-box__img picture-box__img--${i + 1}`}
-              src={`/img/tours/${img}`}
+              src={tourImageUrl(img)}
               alt={`${tour.name} ${i + 1}`}
             />
           </div>
@@ -177,14 +177,14 @@ export default function TourDetail() {
           {tour.images[1] && (
             <img
               className="cta__img cta__img--1"
-              src={`/img/tours/${tour.images[1]}`}
+              src={tourImageUrl(tour.images[1])}
               alt="Tour"
             />
           )}
           {tour.images[2] && (
             <img
               className="cta__img cta__img--2"
-              src={`/img/tours/${tour.images[2]}`}
+              src={tourImageUrl(tour.images[2])}
               alt="Tour"
             />
           )}

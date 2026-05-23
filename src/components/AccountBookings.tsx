@@ -6,6 +6,7 @@ import WriteReviewForm from './WriteReviewForm'
 import type { Booking, MyReview } from '../types'
 import { formatStartDate } from '../utils/formatDate'
 import { normalizeId } from '../utils/mongoId'
+import { tourImageUrl } from '../utils/staticUrl'
 import './account-bookings.css'
 
 function formatBookedOn(value: string | Date | undefined): string {
@@ -60,7 +61,7 @@ function BookingCard({
         <div className="booking-card__media-overlay" aria-hidden />
         <img
           className="booking-card__img"
-          src={`/img/tours/${tour.imageCover}`}
+          src={tourImageUrl(tour.imageCover)}
           alt={tour.name}
         />
         {booking.paid && <span className="booking-card__badge">Paid</span>}

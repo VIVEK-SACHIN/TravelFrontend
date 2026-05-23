@@ -7,6 +7,7 @@ import { useAlert } from '../context/AlertContext'
 import type { MyReview } from '../types'
 import { getApiErrorMessage } from '../utils/apiError'
 import { normalizeId } from '../utils/mongoId'
+import { tourImageUrl } from '../utils/staticUrl'
 import './account-bookings.css'
 
 function formatReviewDate(value: string | Date | undefined): string {
@@ -74,7 +75,7 @@ function MyReviewCard({
         <div className="booking-card__media-overlay" aria-hidden />
         <img
           className="booking-card__img"
-          src={`/img/tours/${tour.imageCover}`}
+          src={tourImageUrl(tour.imageCover)}
           alt={tour.name}
         />
         <span className="booking-card__badge">{item.rating} ★</span>

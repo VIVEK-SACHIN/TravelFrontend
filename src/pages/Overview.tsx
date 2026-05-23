@@ -4,6 +4,7 @@ import { fetchTours } from '../api/tours'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
 import { normalizeId } from '../utils/mongoId'
+import { tourImageUrl } from '../utils/staticUrl'
 
 export default function Overview() {
   const [tours, setTours] = useState<Tour[]>([])
@@ -47,7 +48,7 @@ export default function Overview() {
                 <div className="card__picture-overlay">&nbsp;</div>
                 <img
                   className="card__picture-img"
-                  src={`/img/tours/${tour.imageCover}`}
+                  src={tourImageUrl(tour.imageCover)}
                   alt={tour.name}
                 />
               </div>
