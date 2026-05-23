@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { userPhotoUrl } from '../utils/staticUrl'
-import { useAuth } from '../context/AuthContext'
 import { useAlert } from '../context/AlertContext'
+import { useAuth } from '../context/AuthContext'
+import { userPhotoUrl } from '../utils/staticUrl'
 
 export default function Header() {
   const { user, logout } = useAuth()

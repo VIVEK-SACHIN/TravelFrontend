@@ -1,6 +1,18 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var key = 'travel-ui-theme';
+        var theme = 'green';
+        var ids = ['green', 'ocean', 'sunset', 'violet', 'rose'];
+        try {
+          var stored = localStorage.getItem(key);
+          if (stored && ids.indexOf(stored) !== -1) theme = stored;
+        } catch (e) {}
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/img/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

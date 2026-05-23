@@ -1,9 +1,7 @@
-import { resolveThemeId } from './themes'
+import { applyThemeToDocument } from './applyTheme'
+import { getStoredThemeId } from './persistence'
 
-const DATA_ATTR = 'data-theme'
-
-/** Apply `VITE_THEME` to `<html>` before paint (call once at startup). */
+/** Sync `<html data-theme>` from localStorage before React mounts. */
 export function initTheme(): void {
-  const themeId = resolveThemeId(import.meta.env.VITE_THEME)
-  document.documentElement.setAttribute(DATA_ATTR, themeId)
+  applyThemeToDocument(getStoredThemeId())
 }

@@ -1,7 +1,7 @@
-import { getActiveTheme } from '../theme'
+import { useTheme } from '../context/ThemeContext'
 
 export default function Footer() {
-  const theme = getActiveTheme()
+  const { theme } = useTheme()
 
   return (
     <footer className="footer">

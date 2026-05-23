@@ -4,6 +4,7 @@ import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
 import { getApiErrorMessage } from '../utils/apiError'
 import { userPhotoUrl } from '../utils/staticUrl'
+import ThemeSettings from './ThemeSettings'
 
 export default function AccountSettings() {
   const { user, refreshUser } = useAuth()
@@ -141,6 +142,12 @@ export default function AccountSettings() {
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="line">&nbsp;</div>
+
+      <div className="user-view__form-container">
+        <ThemeSettings />
       </div>
 
       <div className="line">&nbsp;</div>

@@ -10,7 +10,7 @@ import TourMap from '../components/TourMap'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
 import { normalizeId } from '../utils/mongoId'
-import { getActiveTheme } from '../theme'
+import { useTheme } from '../context/ThemeContext'
 import { tourImageUrl, userPhotoUrl } from '../utils/staticUrl'
 
 export default function TourDetail() {
@@ -18,6 +18,7 @@ export default function TourDetail() {
   const navigate = useNavigate()
   const { user } = useAuth()
   const { showAlert } = useAlert()
+  const { theme } = useTheme()
   const [tour, setTour] = useState<Tour | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [booking, setBooking] = useState(false)
@@ -39,7 +40,6 @@ export default function TourDetail() {
 
   if (!tour) return null
 
-  const theme = getActiveTheme()
   const paragraphs = tour.description.split('\n')
 
   const handleBookTour = async () => {
