@@ -9,10 +9,12 @@ export default function Layout() {
   const isAuthPage = AUTH_PATHS.has(pathname)
 
   return (
-    <>
+    <div className="app-shell">
       <Header />
-      <Outlet />
+      <div className="app-shell__scroll">
+        <Outlet />
+      </div>
       {!isAuthPage && <Footer />}
-    </>
+    </div>
   )
 }

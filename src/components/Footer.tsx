@@ -25,9 +25,6 @@ export default function Footer() {
           <a href="#contact">Contact</a>
         </li>
       </ul>
-      <p className="footer__copyright">
-        &copy; TravelAndTour. Built as a React frontend for the TravelAndTour API.
-      </p>
     </footer>
   )
 }
