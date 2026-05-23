@@ -26,7 +26,7 @@ export default function Header() {
         </Link>
       </nav>
       <div className="header__logo">
-        <img src="/img/logo-white.png" alt="Natours logo" />
+        <img src="/img/logo-white.png" alt="TravelAndTour logo" />
       </div>
       <nav className="nav nav--user">
         {user ? (

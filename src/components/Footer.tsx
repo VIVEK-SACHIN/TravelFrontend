@@ -22,7 +22,7 @@ export default function Footer() {
         </li>
       </ul>
       <p className="footer__copyright">
-        &copy; Natours. Built as a React frontend for the TravelAndTour API.
+        &copy; TravelAndTour. Built as a React frontend for the TravelAndTour API.
       </p>
     </footer>
   )

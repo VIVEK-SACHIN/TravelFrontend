@@ -62,7 +62,7 @@
   color: #28b485;
 }
 
-/* Tour cards — responsive grid (Natours breakpoints). */
+/* Tour cards — responsive grid (TravelAndTour breakpoints). */
 @media only screen and (max-width: 75em) {
   .card-container {
     grid-template-columns: repeat(2, 1fr);

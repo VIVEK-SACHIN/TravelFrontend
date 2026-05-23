@@ -172,7 +172,7 @@ export default function TourDetail() {
       <section className="section-cta">
         <div className="cta">
           <div className="cta__img cta__img--logo">
-            <img src="/img/logo-white.png" alt="Natours logo" />
+            <img src="/img/logo-white.png" alt="TravelAndTour logo" />
           </div>
           {tour.images[1] && (
             <img
