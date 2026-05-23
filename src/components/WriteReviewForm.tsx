@@ -45,7 +45,7 @@ function StarPicker({
           onClick={() => onChange(star)}
         >
           <svg className="reviews__star reviews__star--active">
-            <use xlinkHref="/img/icons.svg#icon-star" />
+            <use xlinkHref="/TravelFrontend/img/icons.svg#icon-star" />
           </svg>
         </button>
       ))}

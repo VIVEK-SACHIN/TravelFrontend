@@ -76,13 +76,13 @@ export default function TourDetail() {
           <div className="heading-box__group">
             <div className="heading-box__detail">
               <svg className="heading-box__icon">
-                <use xlinkHref="/img/icons.svg#icon-clock" />
+                <use xlinkHref="/TravelFrontend/img/icons.svg#icon-clock" />
               </svg>
               <span className="heading-box__text">{tour.duration} days</span>
             </div>
             <div className="heading-box__detail">
               <svg className="heading-box__icon">
-                <use xlinkHref="/img/icons.svg#icon-map-pin" />
+                <use xlinkHref="/TravelFrontend/img/icons.svg#icon-map-pin" />
               </svg>
               <span className="heading-box__text">
                 {tour.startLocation.description}

@@ -31,7 +31,7 @@ function ReviewStars({ rating }: { rating: number }) {
             rating >= star ? 'active' : 'inactive'
           }`}
         >
-          <use xlinkHref="/img/icons.svg#icon-star" />
+          <use xlinkHref="/TravelFrontend/img/icons.svg#icon-star" />
         </svg>
       ))}
     </div>
@@ -211,7 +211,7 @@ export default function AccountReviews() {
       {reviews.length === 0 ? (
         <div className="account-bookings__empty">
           <svg className="account-bookings__empty-icon">
-            <use xlinkHref="/img/icons.svg#icon-star" />
+            <use xlinkHref="/TravelFrontend/img/icons.svg#icon-star" />
           </svg>
           <h3 className="heading-tertirary ma-bt-md">No data available</h3>
           <p>

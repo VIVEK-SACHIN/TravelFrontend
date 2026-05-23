@@ -64,25 +64,25 @@ export default function Overview() {
               <p className="card__text">{tour.summary}</p>
               <div className="card__data">
                 <svg className="card__icon">
-                  <use xlinkHref="/img/icons.svg#icon-map-pin" />
+                  <use xlinkHref="/TravelFrontend/img/icons.svg#icon-map-pin" />
                 </svg>
                 <span>{tour.startLocation.description}</span>
               </div>
               <div className="card__data">
                 <svg className="card__icon">
-                  <use xlinkHref="/img/icons.svg#icon-calendar" />
+                  <use xlinkHref="/TravelFrontend/img/icons.svg#icon-calendar" />
                 </svg>
                 <span>{formatStartDate(tour.startDates?.[0])}</span>
               </div>
               <div className="card__data">
                 <svg className="card__icon">
-                  <use xlinkHref="/img/icons.svg#icon-flag" />
+                  <use xlinkHref="/TravelFrontend/img/icons.svg#icon-flag" />
                 </svg>
                 <span>{tour.locations?.length ?? 0} stops</span>
               </div>
               <div className="card__data">
                 <svg className="card__icon">
-                  <use xlinkHref="/img/icons.svg#icon-user" />
+                  <use xlinkHref="/TravelFrontend/img/icons.svg#icon-user" />
                 </svg>
                 <span>{tour.maxGroupSize} people</span>
               </div>

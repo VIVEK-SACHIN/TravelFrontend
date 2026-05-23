@@ -126,7 +126,7 @@ export default function AccountBilling() {
       {records.length === 0 ? (
         <div className="account-bookings__empty">
           <svg className="account-bookings__empty-icon">
-            <use xlinkHref="/img/icons.svg#icon-credit-card" />
+            <use xlinkHref="/TravelFrontend/img/icons.svg#icon-credit-card" />
           </svg>
           <p>When you book a tour through Stripe checkout, your receipt will appear here.</p>
           <Link className="btn btn--green" to="/">

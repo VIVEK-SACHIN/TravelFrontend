@@ -30,7 +30,7 @@ function ReviewStars({ rating }: { rating: number }) {
             rating >= star ? 'active' : 'inactive'
           }`}
         >
-          <use xlinkHref="/img/icons.svg#icon-star" />
+          <use xlinkHref="/TravelFrontend/img/icons.svg#icon-star" />
         </svg>
       ))}
     </div>
@@ -72,19 +72,19 @@ function BookingCard({
         <div className="booking-card__meta">
           <span className="booking-card__meta-item">
             <svg className="booking-card__meta-icon">
-              <use xlinkHref="/img/icons.svg#icon-flag" />
+              <use xlinkHref="/TravelFrontend/img/icons.svg#icon-flag" />
             </svg>
             {tour.difficulty} · {tour.duration} days
           </span>
           <span className="booking-card__meta-item">
             <svg className="booking-card__meta-icon">
-              <use xlinkHref="/img/icons.svg#icon-map-pin" />
+              <use xlinkHref="/TravelFrontend/img/icons.svg#icon-map-pin" />
             </svg>
             {tour.startLocation?.description ?? '—'}
           </span>
           <span className="booking-card__meta-item">
             <svg className="booking-card__meta-icon">
-              <use xlinkHref="/img/icons.svg#icon-calendar" />
+              <use xlinkHref="/TravelFrontend/img/icons.svg#icon-calendar" />
             </svg>
             {formatStartDate(tour.startDates?.[0])}
           </span>
@@ -201,7 +201,7 @@ export default function AccountBookings() {
       {bookings.length === 0 ? (
         <div className="account-bookings__empty">
           <svg className="account-bookings__empty-icon">
-            <use xlinkHref="/img/icons.svg#icon-briefcase" />
+            <use xlinkHref="/TravelFrontend/img/icons.svg#icon-briefcase" />
           </svg>
           <p>Explore our tours and book your next adventure — it will show up here after checkout.</p>
           <Link className="btn btn--green" to="/">
