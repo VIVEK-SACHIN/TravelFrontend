@@ -1,4 +1,5 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import {  useEffect, useRef, useState } from 'react'
+import type { FormEvent } from 'react'
 import { updatePassword, updateUserData } from '../api/auth'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'

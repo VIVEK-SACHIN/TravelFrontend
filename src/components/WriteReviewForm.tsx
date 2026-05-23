@@ -1,4 +1,5 @@
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { createReview, updateReview } from '../api/reviews'
 import { useAlert } from '../context/AlertContext'
 import { getApiErrorMessage } from '../utils/apiError'
