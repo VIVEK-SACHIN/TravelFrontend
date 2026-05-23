@@ -54,12 +54,12 @@
 }
 
 .auth-page__switch a {
-  color: #55c57a;
+  color: var(--theme-primary);
   font-weight: 700;
 }
 
 .auth-page__switch a:hover {
-  color: #28b485;
+  color: var(--theme-primary-dark);
 }
 
 /* Tour cards — responsive grid (TravelAndTour breakpoints). */

@@ -1,8 +1,12 @@
+import { getActiveTheme } from '../theme'
+
 export default function Footer() {
+  const theme = getActiveTheme()
+
   return (
     <footer className="footer">
       <div className="footer__logo">
-        <img src="/img/logo-green.png" alt="Natour logo" />
+        <img src={theme.footerLogo} alt="Natour logo" />
       </div>
       <ul className="footer__nav">
         <li>

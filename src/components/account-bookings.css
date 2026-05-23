@@ -67,7 +67,11 @@
 .booking-card__media-overlay {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(to right bottom, #7dd56fbb, #28b487bb);
+  background-image: linear-gradient(
+    to right bottom,
+    var(--theme-primary-alpha-73),
+    var(--theme-primary-dark-alpha-73)
+  );
   opacity: 0.82;
 }
 
@@ -119,7 +123,7 @@
 .booking-card__meta-icon {
   width: 1.6rem;
   height: 1.6rem;
-  fill: #55c57a;
+  fill: var(--theme-primary);
   flex-shrink: 0;
 }
 
@@ -142,7 +146,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06rem;
-  color: #55c57a;
+  color: var(--theme-primary);
   margin-bottom: 0.6rem;
 }
 
@@ -181,7 +185,7 @@
   display: block;
   font-size: 2.8rem;
   font-weight: 700;
-  color: #55c57a;
+  color: var(--theme-primary);
   line-height: 1.1;
 }
 
@@ -213,12 +217,12 @@
 }
 
 .booking-card__review-btn {
-  border: 1px solid #55c57a !important;
-  color: #55c57a !important;
+  border: 1px solid var(--theme-primary) !important;
+  color: var(--theme-primary) !important;
 }
 
 .booking-card__review-btn:hover {
-  background-color: #55c57a !important;
+  background-color: var(--theme-primary) !important;
   color: #fff !important;
 }
 
@@ -254,7 +258,7 @@
 }
 
 .write-review__heading span {
-  color: #55c57a;
+  color: var(--theme-primary);
 }
 
 .write-review__field {
@@ -284,7 +288,7 @@
 
 .write-review__star-btn--active svg,
 .write-review__star-btn:hover svg {
-  fill: #55c57a;
+  fill: var(--theme-primary);
   transform: scale(1.08);
 }
 
@@ -310,7 +314,7 @@
 .account-bookings__empty-icon {
   width: 6rem;
   height: 6rem;
-  fill: #55c57a;
+  fill: var(--theme-primary);
   opacity: 0.5;
   margin-bottom: 2rem;
 }
@@ -469,7 +473,7 @@
 }
 
 .billing-card__status--paid {
-  background-color: #55c57a;
+  background-color: var(--theme-primary);
   color: #fff;
 }
 

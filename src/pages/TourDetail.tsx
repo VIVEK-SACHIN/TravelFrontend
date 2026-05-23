@@ -10,6 +10,7 @@ import TourMap from '../components/TourMap'
 import type { Tour } from '../types'
 import { formatStartDate } from '../utils/formatDate'
 import { normalizeId } from '../utils/mongoId'
+import { getActiveTheme } from '../theme'
 import { tourImageUrl, userPhotoUrl } from '../utils/staticUrl'
 
 export default function TourDetail() {
@@ -38,6 +39,7 @@ export default function TourDetail() {
 
   if (!tour) return null
 
+  const theme = getActiveTheme()
   const paragraphs = tour.description.split('\n')
 
   const handleBookTour = async () => {
@@ -172,7 +174,7 @@ export default function TourDetail() {
       <section className="section-cta">
         <div className="cta">
           <div className="cta__img cta__img--logo">
-            <img src="/img/logo-white.png" alt="TravelAndTour logo" />
+            <img src={theme.ctaLogo} alt="TravelAndTour logo" />
           </div>
           {tour.images[1] && (
             <img
