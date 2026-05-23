@@ -11,7 +11,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview",
     "copy-assets": "mkdir -p public/css public/img && cp ../TravelAndTour/public/css/style.css public/css/ 2>/dev/null || true && cp ../TravelAndTour/public/img/icons.svg public/img/ 2>/dev/null || true"
