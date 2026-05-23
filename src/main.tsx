@@ -6,6 +6,7 @@ import { initTheme } from './theme/initTheme'
 import './styles/themes.css'
 import './styles/color-mode.css'
 import './styles/layout.css'
+import './styles/responsive.css'
 
 initTheme()
 

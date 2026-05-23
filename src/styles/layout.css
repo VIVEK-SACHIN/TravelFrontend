@@ -40,9 +40,8 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Overview, account, and other standard pages (not login/signup). */
+/* Main padding: fluid values in responsive.css */
 .app-shell__scroll > .main:not(.main--auth) {
-  /* padding: 5rem 4rem 8rem; */
   box-sizing: border-box;
 }
 
@@ -99,13 +98,8 @@ body {
 }
 
 @media only screen and (max-width: 56.25em) {
-  .app-shell__scroll > .main:not(.main--auth) {
-    padding: 4rem 2rem 6rem;
-  }
-
   .card-container {
     grid-template-columns: 1fr;
-    grid-gap: 4rem;
   }
 
   .main--auth {
@@ -117,8 +111,3 @@ body {
   }
 }
 
-@media only screen and (max-width: 37.5em) {
-  .app-shell__scroll > .main:not(.main--auth) {
-    padding-top: 3rem;
-  }
-}

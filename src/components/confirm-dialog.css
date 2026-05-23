@@ -67,11 +67,11 @@
   margin: 0 0 2.5rem;
   font-size: 1.6rem;
   line-height: 1.65;
-  color: #555;
+  color: var(--ui-text);
 }
 
 .confirm-dialog__message strong {
-  color: #333;
+  color: var(--ui-text-strong);
   font-weight: 700;
 }
 

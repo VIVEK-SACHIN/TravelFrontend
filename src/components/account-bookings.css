@@ -101,7 +101,7 @@
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 1rem;
-  color: #333;
+  color: var(--ui-text-strong);
   line-height: 1.2;
 }
 
@@ -129,7 +129,7 @@
 
 .booking-card__summary {
   font-size: 1.45rem;
-  color: #666;
+  color: var(--ui-text);
   line-height: 1.65;
   margin: 0;
 }
@@ -137,7 +137,7 @@
 .booking-card__reviewed {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--ui-border-soft);
 }
 
 .booking-card__reviewed-label {
@@ -156,7 +156,7 @@
 
 .booking-card__reviewed-text {
   font-size: 1.4rem;
-  color: #666;
+  color: var(--ui-text);
   line-height: 1.6;
   margin: 0;
   font-style: italic;
@@ -193,14 +193,14 @@
   display: block;
   font-size: 1.2rem;
   font-weight: 400;
-  color: #999;
+  color: var(--ui-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05rem;
 }
 
 .booking-card__date {
   font-size: 1.3rem;
-  color: #999;
+  color: var(--ui-text-muted);
   text-align: center;
 }
 
@@ -244,8 +244,8 @@
 .booking-card__review-form {
   grid-column: 1 / -1;
   padding: 2rem 2.5rem 2.5rem;
-  background: linear-gradient(to right bottom, #f7fdf9, #f4f9f6);
-  border-top: 1px solid #e8e8e8;
+  background: var(--ui-bg-main);
+  border-top: 1px solid var(--ui-border);
 }
 
 /* Write review form */
@@ -253,7 +253,7 @@
   font-size: 1.6rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #333;
+  color: var(--ui-text-strong);
   margin-bottom: 1.5rem;
 }
 
@@ -329,7 +329,7 @@
 
 .account-bookings__empty h3 {
   margin-bottom: 1rem;
-  color: #555;
+  color: var(--ui-text-strong);
 }
 
 .account-bookings__empty p {
@@ -414,6 +414,44 @@
   }
 }
 
+@media only screen and (max-width: 37.5em) {
+  .account-bookings {
+    padding: 0 1.2rem 2.5rem;
+  }
+
+  .account-bookings__empty,
+  .account-bookings__loading,
+  .account-bookings__error {
+    padding: 4rem 1.5rem;
+  }
+
+  .booking-card__title {
+    font-size: 1.9rem;
+  }
+
+  .write-review__actions {
+    flex-direction: column-reverse;
+  }
+
+  .write-review__actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .billing-card {
+    padding: 1.5rem 1.8rem;
+  }
+
+  .billing-card__main {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .billing-card__amount {
+    text-align: left;
+  }
+}
+
 /* Billing tab */
 .billing-list {
   display: flex;
@@ -440,7 +478,7 @@
 .billing-card__title {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #333;
+  color: var(--ui-text-strong);
   margin: 0 0 0.4rem;
 }
 
@@ -458,7 +496,7 @@
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  color: #333;
+  color: var(--ui-text-strong);
 }
 
 .billing-card__status {
@@ -499,14 +537,14 @@
   font-size: 1.2rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: #999;
+  color: var(--ui-text-muted);
   margin-bottom: 0.3rem;
 }
 
 .billing-card__details dd {
   margin: 0;
   font-size: 1.4rem;
-  color: #555;
+  color: var(--ui-text);
   font-family: monospace;
   word-break: break-all;
 }
