@@ -22,7 +22,7 @@
   margin: 0 auto;
   text-align: center;
   font-size: 1.8rem;
-  color: #777;
+  color: var(--ui-text);
 }
 
 .main__message--error {

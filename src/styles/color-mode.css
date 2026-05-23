@@ -1,0 +1,24 @@
+/**
+ * Light/dark surfaces — toggled via `data-color-mode` on `<html>`.
+ * Defaults live on `:root` in `public/css/style.css`.
+ */
+
+html[data-color-mode='dark'] {
+  color-scheme: dark;
+
+  --ui-bg-main: #12141a;
+  --ui-bg-surface: #1c1f26;
+  --ui-bg-surface-muted: #22262f;
+  --ui-bg-elevated: #2a2f3a;
+  --ui-bg-footer: #161920;
+  --ui-bg-card-footer: #23272f;
+  --ui-text: #b4bac6;
+  --ui-text-muted: #8a919d;
+  --ui-text-strong: #dce0e8;
+  --ui-heading: #e2e6ee;
+  --ui-border: #2e3440;
+  --ui-border-soft: #353b48;
+  --ui-line: #353b48;
+  --ui-shadow: rgba(0, 0, 0, 0.35);
+  --ui-shadow-lg: rgba(0, 0, 0, 0.45);
+}

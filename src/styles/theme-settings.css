@@ -1,7 +1,15 @@
 .theme-settings__hint {
   font-size: 1.5rem;
-  color: #777;
+  color: var(--ui-text);
   line-height: 1.5;
+}
+
+.theme-settings__subheading {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06rem;
+  color: var(--ui-text-strong);
 }
 
 .theme-settings__grid {
@@ -10,15 +18,20 @@
   gap: 1.2rem;
 }
 
+.theme-settings__grid--mode {
+  grid-template-columns: repeat(2, minmax(12rem, 1fr));
+  max-width: 36rem;
+}
+
 .theme-settings__option {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 0.8rem;
   padding: 1rem;
-  border: 2px solid #f4f2f2;
+  border: 2px solid var(--ui-border-soft);
   border-radius: 0.5rem;
-  background: #fff;
+  background: var(--ui-bg-surface);
   cursor: pointer;
   font-family: inherit;
   text-align: left;
@@ -29,7 +42,7 @@
 }
 
 .theme-settings__option:hover {
-  border-color: #ccc;
+  border-color: var(--ui-text-muted);
   transform: translateY(-1px);
 }
 
@@ -53,7 +66,7 @@
 .theme-settings__label {
   font-size: 1.4rem;
   font-weight: 600;
-  color: #555;
+  color: var(--ui-text-strong);
   line-height: 1.3;
 }
 

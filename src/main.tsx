@@ -4,6 +4,7 @@ import App from './App.tsx'
 import { ThemeProvider } from './context/ThemeContext'
 import { initTheme } from './theme/initTheme'
 import './styles/themes.css'
+import './styles/color-mode.css'
 import './styles/layout.css'
 
 initTheme()

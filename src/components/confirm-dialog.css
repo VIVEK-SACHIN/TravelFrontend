@@ -23,7 +23,7 @@
   z-index: 1;
   width: 100%;
   max-width: 48rem;
-  background: #fff;
+  background: var(--ui-bg-surface);
   border-radius: 3px;
   box-shadow: 0 2.5rem 6rem rgba(0, 0, 0, 0.25);
   overflow: hidden;

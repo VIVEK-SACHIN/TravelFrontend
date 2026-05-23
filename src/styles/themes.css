@@ -1,6 +1,6 @@
 /**
  * Brand palettes — consumed via CSS variables in style.css and component CSS.
- * Active theme: Account → Settings → Appearance (see `ThemeContext` + localStorage).
+ * Color theme + light/dark mode: Account → Settings → Appearance (`ThemeContext` + localStorage).
  *
  * `--theme-header-bg` and `--theme-card-overlay-*` are experimental accents
  * (not always the same as button/primary colors).

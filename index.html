@@ -3,14 +3,20 @@
   <head>
     <script>
       (function () {
-        var key = 'travel-ui-theme';
+        var themeKey = 'travel-ui-theme';
+        var modeKey = 'travel-ui-color-mode';
         var theme = 'green';
-        var ids = ['green', 'ocean', 'sunset', 'violet', 'rose'];
+        var mode = 'light';
+        var themeIds = ['green', 'ocean', 'sunset', 'violet', 'rose'];
+        var modes = ['light', 'dark'];
         try {
-          var stored = localStorage.getItem(key);
-          if (stored && ids.indexOf(stored) !== -1) theme = stored;
+          var storedTheme = localStorage.getItem(themeKey);
+          if (storedTheme && themeIds.indexOf(storedTheme) !== -1) theme = storedTheme;
+          var storedMode = localStorage.getItem(modeKey);
+          if (storedMode && modes.indexOf(storedMode) !== -1) mode = storedMode;
         } catch (e) {}
         document.documentElement.setAttribute('data-theme', theme);
+        document.documentElement.setAttribute('data-color-mode', mode);
       })();
     </script>
     <meta charset="UTF-8" />
