@@ -31,3 +31,5 @@ localhost.pem
 *.sw?
 .env
 example.env
+.env
+example.env
