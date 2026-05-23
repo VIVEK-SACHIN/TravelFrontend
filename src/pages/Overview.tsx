@@ -24,7 +24,7 @@ export default function Overview() {
   if (loading) {
     return (
       <main className="main">
-        <p>Loading tours...</p>
+        <p className="main__message">Loading tours...</p>
       </main>
     )
   }
@@ -32,7 +32,7 @@ export default function Overview() {
   if (error) {
     return (
       <main className="main">
-        <p>{error}</p>
+        <p className="main__message main__message--error">{error}</p>
       </main>
     )
   }

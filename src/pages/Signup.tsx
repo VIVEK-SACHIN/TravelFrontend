@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { signup } from '../api/auth'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
@@ -37,7 +37,7 @@ export default function Signup() {
   }
 
   return (
-    <main className="main">
+    <main className="main main--auth">
       <div className="login-form">
         <h2 className="heading-secondary ma-bt-lg">Create a new account</h2>
         <form className="form form--signup" onSubmit={handleSubmit}>
@@ -112,6 +112,9 @@ export default function Signup() {
             </button>
           </div>
         </form>
+        <p className="auth-page__switch">
+          Already have an account? <Link to="/login">Log in</Link>
+        </p>
       </div>
     </main>
   )

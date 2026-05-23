@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { useAlert } from '../context/AlertContext'
 import { useAuth } from '../context/AuthContext'
 import { getApiErrorMessage } from '../utils/apiError'
@@ -37,7 +37,7 @@ export default function Login() {
   }
 
   return (
-    <main className="main">
+    <main className="main main--auth">
       <div className="login-form">
         <h2 className="heading-secondary ma-bt-lg">Log into your account</h2>
         <form className="form form--login" onSubmit={handleSubmit}>
@@ -74,6 +74,9 @@ export default function Login() {
             </button>
           </div>
         </form>
+        <p className="auth-page__switch">
+          Don&apos;t have an account? <Link to="/signup">Sign up</Link>
+        </p>
       </div>
     </main>
   )

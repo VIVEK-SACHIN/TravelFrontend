@@ -1,0 +1,96 @@
+/* App shell — full-height column between header and footer. */
+#root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root > .header,
+#root > .footer {
+  flex-shrink: 0;
+}
+
+/* Overview, account, and other standard pages (not login/signup). */
+.main:not(.main--auth) {
+  padding: 5rem 4rem 8rem;
+  box-sizing: border-box;
+}
+
+.main__message {
+  max-width: 60rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.8rem;
+  color: #777;
+}
+
+.main__message--error {
+  color: #ff7730;
+}
+
+/* Auth — centered form in viewport below header. */
+.main--auth {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  padding: 4rem 2rem;
+  box-sizing: border-box;
+}
+
+.main--auth .login-form {
+  width: 100%;
+  max-width: 55rem;
+  margin: 0;
+}
+
+.auth-page__switch {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.auth-page__switch a {
+  color: #55c57a;
+  font-weight: 700;
+}
+
+.auth-page__switch a:hover {
+  color: #28b485;
+}
+
+/* Tour cards — responsive grid (Natours breakpoints). */
+@media only screen and (max-width: 75em) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5rem;
+  }
+}
+
+@media only screen and (max-width: 56.25em) {
+  .main:not(.main--auth) {
+    padding: 4rem 2rem 6rem;
+  }
+
+  .card-container {
+    grid-template-columns: 1fr;
+    grid-gap: 4rem;
+  }
+
+  .main--auth {
+    padding: 2rem 1.5rem;
+  }
+
+  .main--auth .login-form {
+    padding: 4rem 3rem;
+  }
+}
+
+@media only screen and (max-width: 37.5em) {
+  .main:not(.main--auth) {
+    padding-top: 3rem;
+  }
+}

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { userPhotoUrl } from '../utils/staticUrl'
 import { useAuth } from '../context/AuthContext'
 import { useAlert } from '../context/AlertContext'
@@ -6,12 +6,13 @@ import { useAlert } from '../context/AlertContext'
 export default function Header() {
   const { user, logout } = useAuth()
   const { showAlert } = useAlert()
+  const navigate = useNavigate()
 
   const handleLogout = async () => {
     try {
       await logout()
       showAlert('success', 'Logged out successfully!')
-      window.location.href = '/'
+      navigate('/')
     } catch {
       showAlert('error', 'Error logging out! Try again.')
     }
