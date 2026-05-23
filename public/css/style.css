@@ -12,6 +12,10 @@
   --theme-primary-dark-alpha-85: rgba(40, 180, 135, 0.85);
   --theme-primary-alpha-73: rgba(125, 213, 111, 0.73);
   --theme-primary-dark-alpha-73: rgba(40, 180, 135, 0.73);
+  --theme-header-bg: #1e3d32;
+  --theme-card-overlay-from: #a8e063;
+  --theme-card-overlay-to: #11998e;
+  --theme-card-overlay-opacity: 0.72;
 }
 
 ::-moz-selection {
@@ -313,7 +317,7 @@ body {
 }
 
 .header {
-  background-color: #444;
+  background-color: var(--theme-header-bg);
   padding: 0 5rem;
   height: 8rem;
   position: relative;
@@ -1126,11 +1130,15 @@ body {
     linear,
     left top,
     right bottom,
-    from(var(--theme-primary-light)),
-    to(var(--theme-primary-dark))
+    from(var(--theme-card-overlay-from)),
+    to(var(--theme-card-overlay-to))
   );
-  background-image: linear-gradient(to right bottom, var(--theme-primary-light), var(--theme-primary-dark));
-  opacity: 0.7;
+  background-image: linear-gradient(
+    to right bottom,
+    var(--theme-card-overlay-from),
+    var(--theme-card-overlay-to)
+  );
+  opacity: var(--theme-card-overlay-opacity);
 }
 .card__picture-img {
   -o-object-fit: cover;

@@ -1,9 +1,12 @@
 /**
  * Brand palettes — consumed via CSS variables in style.css and component CSS.
  * Active theme: `VITE_THEME` → `data-theme` on `<html>` (see `src/theme/initTheme.ts`).
+ *
+ * `--theme-header-bg` and `--theme-card-overlay-*` are experimental accents
+ * (not always the same as button/primary colors).
  */
 
-/* Green — same values as `:root` defaults in style.css */
+/* Green — same primary tokens as `:root` defaults in style.css */
 html[data-theme='green'] {
   --theme-primary: #55c57a;
   --theme-primary-dark: #28b487;
@@ -16,6 +19,11 @@ html[data-theme='green'] {
   --theme-primary-dark-alpha-85: rgba(40, 180, 135, 0.85);
   --theme-primary-alpha-73: rgba(125, 213, 111, 0.73);
   --theme-primary-dark-alpha-73: rgba(40, 180, 135, 0.73);
+  /* Experiment: forest header + lime→teal card wash */
+  --theme-header-bg: #1e3d32;
+  --theme-card-overlay-from: #a8e063;
+  --theme-card-overlay-to: #11998e;
+  --theme-card-overlay-opacity: 0.72;
 }
 
 html[data-theme='ocean'] {
@@ -30,6 +38,11 @@ html[data-theme='ocean'] {
   --theme-primary-dark-alpha-85: rgba(26, 111, 168, 0.85);
   --theme-primary-alpha-73: rgba(110, 198, 255, 0.73);
   --theme-primary-dark-alpha-73: rgba(26, 111, 168, 0.73);
+  /* Experiment: midnight navy header + aqua→indigo cards */
+  --theme-header-bg: #0f2744;
+  --theme-card-overlay-from: #4facfe;
+  --theme-card-overlay-to: #2b5876;
+  --theme-card-overlay-opacity: 0.68;
 }
 
 html[data-theme='sunset'] {
@@ -44,6 +57,11 @@ html[data-theme='sunset'] {
   --theme-primary-dark-alpha-85: rgba(211, 84, 0, 0.85);
   --theme-primary-alpha-73: rgba(245, 176, 65, 0.73);
   --theme-primary-dark-alpha-73: rgba(211, 84, 0, 0.73);
+  /* Experiment: warm espresso header + peach→crimson cards */
+  --theme-header-bg: #3d2618;
+  --theme-card-overlay-from: #ff9a56;
+  --theme-card-overlay-to: #c0392b;
+  --theme-card-overlay-opacity: 0.7;
 }
 
 html[data-theme='violet'] {
@@ -58,6 +76,11 @@ html[data-theme='violet'] {
   --theme-primary-dark-alpha-85: rgba(108, 52, 131, 0.85);
   --theme-primary-alpha-73: rgba(195, 155, 211, 0.73);
   --theme-primary-dark-alpha-73: rgba(108, 52, 131, 0.73);
+  /* Experiment: deep plum header + orchid→royal cards */
+  --theme-header-bg: #2a1838;
+  --theme-card-overlay-from: #da77f2;
+  --theme-card-overlay-to: #5f27cd;
+  --theme-card-overlay-opacity: 0.7;
 }
 
 html[data-theme='rose'] {
@@ -72,4 +95,9 @@ html[data-theme='rose'] {
   --theme-primary-dark-alpha-85: rgba(196, 69, 105, 0.85);
   --theme-primary-alpha-73: rgba(253, 121, 168, 0.73);
   --theme-primary-dark-alpha-73: rgba(196, 69, 105, 0.73);
+  /* Experiment: wine header + blush→magenta cards */
+  --theme-header-bg: #4a1f36;
+  --theme-card-overlay-from: #ff9ff3;
+  --theme-card-overlay-to: #b53471;
+  --theme-card-overlay-opacity: 0.68;
 }

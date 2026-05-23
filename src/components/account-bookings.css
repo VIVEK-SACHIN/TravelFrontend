@@ -69,10 +69,10 @@
   inset: 0;
   background-image: linear-gradient(
     to right bottom,
-    var(--theme-primary-alpha-73),
-    var(--theme-primary-dark-alpha-73)
+    var(--theme-card-overlay-from),
+    var(--theme-card-overlay-to)
   );
-  opacity: 0.82;
+  opacity: var(--theme-card-overlay-opacity);
 }
 
 .booking-card__badge {
