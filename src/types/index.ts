@@ -35,13 +35,26 @@ export interface TourLocation {
   day?: number
 }
 
+/** Stripe payment snapshot saved when checkout completes. */
+export interface BillingDetails {
+  stripeSessionId: string
+  stripePaymentIntent?: string
+  currency: string
+  paymentStatus: string
+  amountTotal: number
+}
+
 export interface Booking {
   _id: string | { $oid: string }
   price: number
   paid: boolean
   createdAt?: string | Date
+  billing?: BillingDetails
   tour: Tour
 }
+
+/** Paid booking with billing fields — `GET /billing/my`. */
+export type BillingRecord = Booking
 
 export interface Tour {
   /** Plain string after `normalizeTour`; API may send `{ $oid: string }` from Rust/Mongo. */
