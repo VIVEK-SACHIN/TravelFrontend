@@ -1,36 +1,44 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./img/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato:300,300i,700"
+    />
+
+    <title>TravelAndTour</title>
+
     <script>
       (function () {
         var themeKey = 'travel-ui-theme';
         var modeKey = 'travel-ui-color-mode';
         var theme = 'green';
         var mode = 'light';
-        var themeIds = ['green', 'ocean', 'sunset', 'violet', 'rose'];
-        var modes = ['light', 'dark'];
+
         try {
           var storedTheme = localStorage.getItem(themeKey);
-          if (storedTheme && themeIds.indexOf(storedTheme) !== -1) theme = storedTheme;
+          if (storedTheme) theme = storedTheme;
+
           var storedMode = localStorage.getItem(modeKey);
-          if (storedMode && modes.indexOf(storedMode) !== -1) mode = storedMode;
+          if (storedMode) mode = storedMode;
         } catch (e) {}
+
         document.documentElement.setAttribute('data-theme', theme);
         document.documentElement.setAttribute('data-color-mode', mode);
       })();
     </script>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/img/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Lato:300,300i,700"
-    />
-    <title>TravelAndTour</title>
   </head>
+
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- IMPORTANT: Vite will inject correct path during build -->
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>
