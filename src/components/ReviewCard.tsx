@@ -21,7 +21,7 @@ export default function ReviewCard({ review }: { review: Review }) {
               review.rating >= star ? 'active' : 'inactive'
             }`}
           >
-            <use xlinkHref="/TravelFrontend/img/icons.svg#icon-star" />
+            <use xlinkHref="/img/icons.svg#icon-star" />
           </svg>
         ))}
       </div>
